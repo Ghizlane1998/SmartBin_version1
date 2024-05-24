@@ -106,7 +106,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // User added successfully
                                         Utility.showToast(SignUpActivity.this, "User added successfully");
-                                        firebaseAuth.getCurrentUser().sendEmailVerification();
+                                        firebaseAuth.getCurrentUser();
                                         firebaseAuth.signOut();
 //                                        finish();
                                     } else {
