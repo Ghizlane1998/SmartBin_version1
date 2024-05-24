@@ -17,8 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Objects;
-
 public class SignInActivity extends AppCompatActivity {
 
     EditText emailEditText,passwordEditText;
@@ -87,10 +85,13 @@ public class SignInActivity extends AppCompatActivity {
                 changeInProgress(false);
                 if(task.isSuccessful()){
                     //login is success
-
+                    if(firebaseAuth.getCurrentUser().isEmailVerified()){
                         //go to main activity
                         startActivity(new Intent(SignInActivity.this,MainActivity.class));
                         finish();
+                    }else{
+                        Utility.showToast(SignInActivity.this,"Email not verified, Please verify your email.");
+                    }
                 }else{
                     //login failed
                     Utility.showToast(SignInActivity.this,task.getException().getLocalizedMessage());
