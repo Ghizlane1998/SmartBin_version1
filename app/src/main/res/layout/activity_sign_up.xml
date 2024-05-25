@@ -11,7 +11,7 @@
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/sign_up"
+        android:src="@drawable/binicon2"
         android:layout_marginVertical="32dp"
         android:contentDescription="@string/app_name"
         />
@@ -98,6 +98,7 @@
             android:layout_marginTop="12dp"
             android:padding="16dp"
             android:text="CREATE ACCOUNT"
+            android:backgroundTint="@color/green"
             android:textSize="16sp"
             />
 

@@ -15,10 +15,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tasks"
+            android:text="Smart Bin"
             android:id="@+id/page_title"
             android:textSize="32sp"
-            android:textColor="@color/primary"
+            android:textColor="@color/green"
             android:textStyle="bold"
             />
         <ImageButton
@@ -28,7 +28,7 @@
             android:id="@+id/menu_btn"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            app:tint="@color/primary"
+            app:tint="@color/rose"
             android:background="@color/white"
             />
     </RelativeLayout>
@@ -46,7 +46,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/user"
+            android:src="@drawable/profil_edit"
             android:scaleType="centerCrop"
             android:background="@drawable/circle_shape" />
 
@@ -54,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit"
+            android:textColor="@color/rose"
             android:textSize="26sp"
             android:textStyle="bold"
             android:layout_centerInParent="true" />
@@ -70,7 +71,7 @@
         >
         <TextView
             android:id="@+id/chang_profile_btn"
-            android:text="Username"
+            android:text="E-mail"
             android:layout_centerHorizontal="true"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -84,7 +85,7 @@
             android:background="@drawable/rounded_corner"
             android:paddingHorizontal="16dp"
             android:textSize="20sp"
-            android:text="username"
+            android:text="gbennani205@gmail.com"
             android:paddingVertical="10dp"
             android:layout_marginLeft="15dp"
             />
@@ -102,7 +103,7 @@
         >
         <TextView
             android:id="@+id/chang_email_btn"
-            android:text="Email"
+            android:text="UserName"
             android:layout_centerHorizontal="true"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -116,7 +117,7 @@
             android:background="@drawable/rounded_corner"
             android:paddingHorizontal="16dp"
             android:textSize="20sp"
-            android:text="gbennani205@gmail.com"
+            android:text="username"
             android:paddingVertical="10dp"
             android:layout_marginLeft="15dp"
             />
@@ -146,7 +147,7 @@
             android:layout_width="157dp"
             android:layout_height="68dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/primary"
+            android:backgroundTint="@color/green"
             android:text="save" />
     </LinearLayout>
 
