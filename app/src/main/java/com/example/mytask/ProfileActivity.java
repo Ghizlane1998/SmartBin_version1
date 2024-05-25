@@ -30,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     CircleImageView imageView;
     Button closeButton, saveButton;
 
-    EditText usernameEditText;
+    EditText usernameEditText, emailEditText;
     Uri uri;
 
     FirebaseUser firebaseUser;
@@ -45,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.save_profile_btn);
         closeButton = findViewById(R.id.close_btn);
         usernameEditText = findViewById(R.id.username_edit_text);
+        usernameEditText = findViewById(R.id.email_edit_text);
 
         FirebaseHelper firebaseHelper = new FirebaseHelper();
         firebaseHelper.getUserDisplayName(

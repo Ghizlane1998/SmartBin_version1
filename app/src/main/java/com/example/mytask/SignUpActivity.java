@@ -95,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Get the Firestore instance
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
-                            User user = new User(email, username); // Create a User object with the user information
+                            User user = new User(username,email); // Create a User object with the user information
 
                             // Add user information to Firestore
                             DocumentReference documentReference = db.collection("users").document(email); // Use email as the document ID

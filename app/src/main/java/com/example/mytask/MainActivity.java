@@ -2,6 +2,7 @@ package com.example.mytask;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.android.volley.Request;
@@ -73,17 +75,56 @@ public class MainActivity extends AppCompatActivity {
     TextView weather;
 
     String weatherUrl;
+    CardView projectCard,eventCard,notesCard,tasksCard;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ///// start Cards //////
+        // Récupérer les références des CardViews
+         tasksCard = findViewById(R.id.TasksCard);
+         notesCard = findViewById(R.id.NotesCard);
+         eventCard = findViewById(R.id.EventCard);
+         projectCard = findViewById(R.id.ProjetCard);
 
-        replaceFragment(new TasksFragment());
+        // Définir les listeners de clic pour chaque CardView
+        tasksCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Traitement lors du clic sur la carte "Tasks"
+                Toast.makeText(MainActivity.this, "Clicked Tasks Card", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,BinActivity.class));
+            }
+        });
 
+        notesCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Traitement lors du clic sur la carte "Notes"
+                Toast.makeText(MainActivity.this, "Clicked Notes Card", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,TriActivity.class));
+            }
+        });
+
+        eventCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Traitement lors du clic sur la carte "Events"
+                Toast.makeText(MainActivity.this, "Clicked Events Card", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        projectCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Traitement lors du clic sur la carte "Projects"
+                Toast.makeText(MainActivity.this, "Clicked Projects Card", Toast.LENGTH_SHORT).show();
+            }
+        });
+///// End Cards //////
         usernameTextView = findViewById(R.id.username_text_view);
-
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.getUsername().observe(this, username -> {
             if (username != null) {
@@ -94,133 +135,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         imageView = findViewById(R.id.profile_image);
-
-        addTaskBtn = findViewById(R.id.add_task_btn);
-//        recyclerView = findViewById(R.id.recycler_view);
         menuBtn = findViewById(R.id.menu_btn);
         userInfosLayout = findViewById(R.id.user_info);
-
-        myListButton = findViewById(R.id.my_tasks_btn);
-        eventsButton = findViewById(R.id.events_btn);
-        projectsButton = findViewById(R.id.projects_btn);
-        notesButton = findViewById(R.id.notes_btn);
-
         weather = findViewById(R.id.weather);
-
         this.obtainLocation();
 
-        myListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frame_layout, TasksFragment.class, null)
-                        .setReorderingAllowed(true)
-                        .addToBackStack("name") // Name can be null
-                        .commit();
-                // Change style for "Tasks" button
-                myListButton.setTextColor(getResources().getColor(R.color.primary));
-                myListButton.setBackgroundColor(Color.parseColor("#D4E7F5"));
-                myListButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#D4E7F5")));
 
-                // Reset style for "Notes" button
-                notesButton.setTextColor(getResources().getColor(R.color.gray));
-                notesButton.setBackgroundColor(getResources().getColor(android.R.color.white));
-
-                // Reset style for "Events" button
-                eventsButton.setTextColor(getResources().getColor(R.color.gray));
-                eventsButton.setBackgroundColor(getResources().getColor(android.R.color.white));
-
-                // Reset style for "Projects" button
-                projectsButton.setTextColor(getResources().getColor(R.color.gray));
-                projectsButton.setBackgroundColor(getResources().getColor(android.R.color.white));
-            }
-        });
-
-        notesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frame_layout, NotesFragment.class, null)
-                        .setReorderingAllowed(true)
-                        .addToBackStack("name") // Name can be null
-                        .commit();
-                // Change style for "Tasks" button
-                notesButton.setTextColor(getResources().getColor(R.color.primary));
-                notesButton.setBackgroundColor(Color.parseColor("#D4E7F5"));
-                notesButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#D4E7F5")));
-
-                // Reset style for "Tasks" button
-                myListButton.setTextColor(getResources().getColor(R.color.gray));
-                myListButton.setBackgroundColor(getResources().getColor(android.R.color.white));
-
-                // Reset style for "Events" button
-                eventsButton.setTextColor(getResources().getColor(R.color.gray));
-                eventsButton.setBackgroundColor(getResources().getColor(android.R.color.white));
-
-                // Reset style for "Projects" button
-                projectsButton.setTextColor(getResources().getColor(R.color.gray));
-                projectsButton.setBackgroundColor(getResources().getColor(android.R.color.white));
-            }
-        });
-
-
-        eventsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frame_layout, EventsFragment.class, null)
-                        .setReorderingAllowed(true)
-                        .addToBackStack("name") // Name can be null
-                        .commit();
-                // Change style for "Events" button
-                eventsButton.setTextColor(getResources().getColor(R.color.primary));
-                eventsButton.setBackgroundColor(Color.parseColor("#D4E7F5"));
-                eventsButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#D4E7F5")));
-
-                // Reset style for "Notes" button
-                notesButton.setTextColor(getResources().getColor(R.color.gray));
-                notesButton.setBackgroundColor(getResources().getColor(android.R.color.white));
-
-                // Reset style for "Tasks" button
-                myListButton.setTextColor(getResources().getColor(R.color.gray));
-                myListButton.setBackgroundColor(getResources().getColor(android.R.color.white));
-
-                // Reset style for "Projects" button
-                projectsButton.setTextColor(getResources().getColor(R.color.gray));
-                projectsButton.setBackgroundColor(getResources().getColor(android.R.color.white));
-            }
-        });
-
-        projectsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frame_layout, ProjectFragment.class, null)
-                        .setReorderingAllowed(true)
-                        .addToBackStack("name") // Name can be null
-                        .commit();
-                // Change style for "Events" button
-                projectsButton.setTextColor(getResources().getColor(R.color.primary));
-                projectsButton.setBackgroundColor(Color.parseColor("#D4E7F5"));
-                projectsButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#D4E7F5")));
-
-                // Reset style for "Notes" button
-                notesButton.setTextColor(getResources().getColor(R.color.gray));
-                notesButton.setBackgroundColor(getResources().getColor(android.R.color.white));
-
-                // Reset style for "Tasks" button
-                myListButton.setTextColor(getResources().getColor(R.color.gray));
-                myListButton.setBackgroundColor(getResources().getColor(android.R.color.white));
-
-                // Reset style for "Events" button
-                eventsButton.setTextColor(getResources().getColor(R.color.gray));
-                eventsButton.setBackgroundColor(getResources().getColor(android.R.color.white));
-            }
-        });
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         uri = firebaseUser.getPhotoUrl();
@@ -230,24 +150,6 @@ public class MainActivity extends AppCompatActivity {
             Picasso.get().load(uri).into(imageView);
         }
 
-        addTaskBtn.setOnClickListener(v -> {
-            // Check if the currently active fragment is the TasksFragment
-            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.frame_layout);
-            if (currentFragment instanceof TasksFragment) {
-                // If the current fragment is TasksFragment, navigate to TaskDetailsActivity
-                startActivity(new Intent(MainActivity.this, TaskDetailsActivity.class));
-            }else if (currentFragment instanceof NotesFragment) {
-                // If the current fragment is NoteFragment, navigate to NoteDetailsActivity
-                Log.d("add note clicked","note");
-                startActivity(new Intent(MainActivity.this, NoteDetailsActivity.class));
-            }else if (currentFragment instanceof ProjectFragment) {
-                // If the current fragment is TasksFragment, navigate to TaskDetailsActivity
-                startActivity(new Intent(MainActivity.this, ProjectDetailsActivity.class));
-            } else {
-                // If the current fragment is not TasksFragment, navigate to EventDetailsActivity
-                startActivity(new Intent(MainActivity.this, EventDetailsActivity.class));
-            }
-        });
         menuBtn.setOnClickListener(v -> showMenu());
         userInfosLayout.setOnClickListener( v -> {
             startActivity(new Intent(MainActivity.this,ProfileActivity.class));
@@ -259,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 //        TasksFragment tasksFragment = (TasksFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment_container);
 
     }
-
+// End of OnCreate //
     void showMenu() {
         PopupMenu popupMenu = new PopupMenu(MainActivity.this,menuBtn);
         popupMenu.getMenu().add("Logout");
@@ -310,15 +212,6 @@ public class MainActivity extends AppCompatActivity {
 //        super.onResume();
 ////        taskAdapter.notifyDataSetChanged();
 //    }
-
-    private void replaceFragment(Fragment fragment){
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,fragment);
-        fragmentTransaction.commit();
-
-    }
 
 
     private void getWeatherData() {

@@ -116,7 +116,7 @@
             android:background="@drawable/rounded_corner"
             android:paddingHorizontal="16dp"
             android:textSize="20sp"
-            android:text="hussien.chakra@gmail.com"
+            android:text="gbennani205@gmail.com"
             android:paddingVertical="10dp"
             android:layout_marginLeft="15dp"
             />
